@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div `
-     display: flex;
-     justify-content: space-between;
-     flex-wrap: wrap;
+     margin-bottom: 80px;
+`;
 
-     margin-bottom: 60px;
+export const InputField = styled.div `
+    position: relative;
+    width: 265px;
+
+    &:not(:last-child) {
+      margin-bottom: 60px;
+    } 
 `;
 
 
@@ -18,10 +23,10 @@ export const Label = styled.label `
 `;
 
 export const Input = styled.input`
-    font-size: 22px;
+    font-size: 32px;
 
     width: 100%;
-    height: 24px;
+    height: 42px;
     background-color: transparent;
     border: none;
     border-bottom: 2px solid rgba(0, 14, 65, 0.4);
@@ -50,6 +55,7 @@ export const AddButton = styled.button `
     outline: 0;
     padding: 12px 14px;
     text-align: center;
+    margin: 0 auto;
 
 
   &:hover {
@@ -57,3 +63,5 @@ export const AddButton = styled.button `
   color: #FF4742;
    }
 `;
+
+

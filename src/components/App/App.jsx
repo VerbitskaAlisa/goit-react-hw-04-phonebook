@@ -3,7 +3,8 @@ import { nanoid } from "nanoid";
 import Form from "../Form/Form";
 import ContactsList from "../ContactsList/ContactsList";
 import Filter from "../Filter/Filter";
-import { Container, MainTitle, Title } from './App.styled';
+import { Container, MainTitle, Title, OpenModalBtn } from './App.styled';
+import ModalWindow from "components/Modal/Modal";
 
 
 class App extends Component {
@@ -15,12 +16,15 @@ class App extends Component {
             {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
         ],
         filter: '',
+        showModal: false,
     }
 
     addContact = ({ name, number}) => {
         this.setState(prevState => ({
             contacts: [...prevState.contacts, {id: nanoid(), name, number}]
         }))
+
+        this.toggleModal();
     }
 
     deleteContact = contactId => {
@@ -56,16 +60,23 @@ class App extends Component {
         }
       }
 
+      toggleModal = () => {
+        this.setState(({showModal}) => ({
+          showModal: !showModal,
+        }))
+      }
+
     render() {
-        const { contacts, filter } = this.state;
-        const { addContact, changeFilter, getFilteredContact, deleteContact } = this;
+        const { contacts, filter, showModal } = this.state;
+        const { addContact, changeFilter, getFilteredContact, deleteContact, toggleModal } = this;
         return (
             <Container>
                 <MainTitle>Phonebook</MainTitle>
-                <Form onSubmit={addContact} contacts={contacts}/>
+                <OpenModalBtn onClick={toggleModal}>Add</OpenModalBtn>
                 <Title>Contacts</Title>
                 <Filter value={filter} onChange={changeFilter}/>
                 <ContactsList contacts={getFilteredContact()} onDeleteContact={deleteContact}/>
+                {showModal && <ModalWindow onClose={toggleModal}><Form onSubmit={addContact} contacts={contacts}/></ModalWindow>}
             </Container>
         )
     }

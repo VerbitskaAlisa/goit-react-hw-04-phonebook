@@ -1,6 +1,6 @@
 import { Component } from "react";
 import PropTypes from 'prop-types';
-import { Label, Input, Wrap, AddButton } from './Form.styled'
+import { Label, Input, Wrap, AddButton, InputField } from './Form.styled'
 
 class Form extends Component {
     static defaultProps = {
@@ -47,27 +47,30 @@ class Form extends Component {
    render () {
     return (
         <form onSubmit={this.handleSubmit}>
-            <Wrap>
-                <Label>
-                    Name
-                    <Input type="text" 
+            <Wrap>  
+                    <InputField>
+                    <Label htmlFor="name">Name</Label>
+                    <Input type="text"
+                           id="name" 
                            name="name"
                            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                            onChange={this.handleInputChange}
                            value={this.state.name}
                            required />
-                </Label>
-                <Label>
-                    Number
+                    </InputField>
+                    <InputField>
+                    <Label htmlFor="number">Number</Label>
                     <Input type="tel" 
                            name="number" 
+                           id='number'
                            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                            required
                            value={this.state.number}
                            onChange={this.handleInputChange}/>
-                </Label>
+                    </InputField>
+                    
                 </Wrap>
                 <AddButton type="submit">Add contact</AddButton>
             </form>
